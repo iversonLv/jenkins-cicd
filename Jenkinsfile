@@ -9,10 +9,27 @@ pipeline {
         stage('Set Build Name') {
           steps {
               script {
-                  def commit = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                  def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    def commit = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 
-                  currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
+                    def branch = env.GIT_BRANCH?.replace('origin/', '')
+
+                    def author = sh(
+                        script: "git log -1 --pretty=%an",
+                        returnStdout: true
+                    ).trim()
+
+                    def msg = sh(
+                        script: "git log -1 --pretty=%B",
+                        returnStdout: true
+                    ).trim()
+
+                    currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
+
+                    currentBuild.description = """
+                    Author: ${author}
+                    Message: ${msg}
+                """
+                }
               }
           }
         }
