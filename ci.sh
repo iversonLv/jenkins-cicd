@@ -1,13 +1,12 @@
 #!/bin/bash
 
 set -e
-corepack enable
 
 echo "Install dependencies..."
-pnpm install --frozen-lockfile
+npx pnpm install --frozen-lockfile
 
 echo "Run tests..."
-pnpm run test:coverage
+npx pnpm run test:coverage
 
 echo "Build..."
-pnpm run build
+npx pnpm run build
