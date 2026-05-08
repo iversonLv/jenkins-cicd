@@ -1,17 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:22'
+        }
+    }
 
     environment {
         CI = 'true'
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/iversonLv/jenkins-cicd.git'
-            }
-        }
-
         stage('CI') {
             steps {
                 sh 'bash ci.sh'
