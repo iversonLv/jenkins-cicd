@@ -1,18 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:22'
-        }
-    }
-
-    environment {
-        CI = 'true'
-    }
+    agent any
 
     stages {
         stage('CI') {
             steps {
-                sh 'bash ci.sh'
+                sh '''
+                docker run --rm \
+                -v $WORKSPACE:/app \
+                -w /app \
+                node:22 \
+                bash ci.sh
+                '''
             }
         }
     }
