@@ -6,9 +6,9 @@ pipeline {
     }
 
     stages {
-        stage('Set Build Name') {
-          steps {
-              script {
+        stage('Set Build Metadata') {
+            steps {
+                script {
                     def commit = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 
                     def branch = env.GIT_BRANCH?.replace('origin/', '')
@@ -26,12 +26,11 @@ pipeline {
                     currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
 
                     currentBuild.description = """
-                    Author: ${author}
-                    Message: ${msg}
-                """
+        Author: ${author}
+        Message: ${msg}
+        """
                 }
-              }
-          }
+            }
         }
 
         stage('Checkout') {
