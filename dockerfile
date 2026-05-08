@@ -1,11 +1,16 @@
-FROM node:22
+FROM jenkins/jenkins:lts
 
-ENV CI=true
+USER root
 
-RUN corepack enable
+# install node
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
-WORKDIR /app
+# install pnpm
+RUN npm install -g pnpm
 
-COPY . .
+# install docker CLI（可选）
+RUN apt-get install -y docker.io
 
-CMD ["bash", "ci.sh"]
+USER jenkins
