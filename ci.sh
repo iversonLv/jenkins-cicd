@@ -3,7 +3,7 @@
 set -e
 
 echo "Install pnpm..."
-npx install -g pnpm
+npm install -g pnpm
 
 echo "Install dependencies..."
 pnpm install --frozen-lockfile
