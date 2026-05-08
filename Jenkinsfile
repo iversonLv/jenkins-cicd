@@ -34,7 +34,8 @@ pipeline {
                 reportFiles: 'index.html',
                 reportName: 'Coverage Report',
                 keepAll: true,
-                allowMissing: false
+                allowMissing: false,
+                alwaysLinkToLastBuild: true
             ])
         }
     }
