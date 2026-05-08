@@ -1,9 +1,7 @@
 #!/bin/bash
 
 set -e
-
-echo "Install pnpm..."
-npm install -g pnpm
+corepack enable
 
 echo "Install dependencies..."
 pnpm install --frozen-lockfile
