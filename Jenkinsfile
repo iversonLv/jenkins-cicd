@@ -18,17 +18,11 @@ pipeline {
                         returnStdout: true
                     ).trim()
 
-                    def msg = sh(
-                        script: "git log -1 --pretty=%B",
-                        returnStdout: true
-                    ).trim()
-
                     currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
 
                     currentBuild.description = """
-        Author: ${author}
-        Message: ${msg}
-        """
+                    By: ${author}
+                    """
                 }
             }
         }
