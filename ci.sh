@@ -1,15 +1,18 @@
 #!/bin/bash
 
+set -e
+
+echo "Enable corepack..."
+corepack enable
+corepack prepare pnpm@latest --activate
+
 echo "Install dependencies..."
-pnpm install --frozen-lockfile || exit 1
+pnpm install --frozen-lockfile
 
-echo "Run test..."
-pnpm  run test:ci || true
+echo "Run tests..."
+pnpm run test:coverage
 
-echo "Run unit tests..."
-pnpm  run coverage:ci || true
+echo "Build..."
+pnpm run build
 
-echo "Build app..."
-pnpm  run build || exit 1
-
-echo "CI pipeline completed!"
+echo "Done!"
