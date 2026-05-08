@@ -12,7 +12,3 @@ npx pnpm run coverage:ci
 
 echo "Build..."
 npx pnpm run build
-
-echo "Build artifact..."
-mkdir -p artifact
-zip -r artifact/dist-${VERSION}.zip dist

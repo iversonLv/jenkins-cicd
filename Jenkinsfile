@@ -6,12 +6,23 @@ pipeline {
     }
 
     stages {
+        stage('Set Build Name') {
+          steps {
+              script {
+                  def commit = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                  def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+
+                  currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
+              }
+          }
+        }
 
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/iversonLv/jenkins-cicd.git'
             }
         }
+
 
         stage('Run CI Script') {
             steps {
@@ -21,7 +32,7 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'dist/**, coverage/**, artifact/*.zip', fingerprint: true
+                archiveArtifacts artifacts: 'dist/**, coverage/**', fingerprint: true
             }
         }
 
