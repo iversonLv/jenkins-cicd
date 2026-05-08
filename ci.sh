@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+corepack enable
 echo "Install pnpm..."
 npm install -g pnpm
 
