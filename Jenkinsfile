@@ -5,8 +5,11 @@ pipeline {
         stage('CI') {
             steps {
                 sh '''
-                docker build -t my-ci .
-                docker run --rm my-ci
+                docker run --rm \
+                -v $WORKSPACE:/app \
+                -w /app \
+                node:22 \
+                bash ci.sh
                 '''
             }
         }
