@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/iversonLv/jenkins-cicd.git'
+                git branch: 'main', url: 'https://github.com/iversonLv/jenkins-cicd.git'
             }
         }
 
         stage('CI') {
             steps {
-                sh './ci.sh'
+                sh 'bash ci.sh'
             }
         }
     }
