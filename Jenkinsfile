@@ -50,7 +50,7 @@ pipeline {
             publishHTML([
                 reportDir: 'coverage',
                 reportFiles: 'index.html',
-                reportName: 'Coverage Report',
+                reportName: 'UT coverage',
                 keepAll: true,
                 allowMissing: false,
                 alwaysLinkToLastBuild: true
