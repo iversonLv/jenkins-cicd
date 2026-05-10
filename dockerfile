@@ -2,15 +2,13 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-# install node
-RUN apt-get update && apt-get install -y curl && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# install packages
+RUN apt-get update && apt-get install -y curl docker.io zip
 
-# install pnpm
-RUN npm install -g pnpm
+# install node 22
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs
 
-# install docker CLI（可选）
-RUN apt-get install -y docker.io
+# enable corepack ONCE
+RUN corepack enable
 
 USER jenkins

@@ -39,7 +39,7 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'dist/**, coverage/**', fingerprint: true
+                archiveArtifacts artifacts: 'dist/**, coverage/**, artifact/*.zip', fingerprint: true
             }
         }
 
