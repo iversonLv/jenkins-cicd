@@ -19,10 +19,7 @@ pipeline {
                     ).trim()
 
                     currentBuild.displayName = "#${BUILD_NUMBER} ${branch} ${commit}"
-
-                    currentBuild.description = """
-                    By: ${author}
-                    """
+                    currentBuild.description = """By: ${author}"""
                 }
             }
         }
