@@ -6,12 +6,6 @@ VERSION=$(git rev-parse --short HEAD)
 
 echo "VERSION=$VERSION"
 
-echo "Enable corepack..."
-corepack enable
-
-echo "Use packageManager version..."
-corepack install
-
 echo "PNPM version:"
 pnpm --version
 
@@ -21,6 +15,7 @@ pnpm install --frozen-lockfile
 echo "Run coverage..."
 
 if pnpm run coverage:ci; then
+    zip -r artifact/coverage-${VERSION}.zip coverage
     echo "Coverage success"
 else
     echo "Coverage failed"
@@ -30,3 +25,8 @@ fi
 
 echo "Build..."
 pnpm run build
+
+echo "Zip build"
+zip -r artifact/dist-${VERSION}.zip dist
+
+echo "Success..."
