@@ -22,3 +22,7 @@ docker run -d \
   --name my-jenkins \
   my-jenkins
 ```
+
+```bash
+ngrok http 8080
+```
