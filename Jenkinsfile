@@ -1,6 +1,10 @@
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'PR_NUMBER', defaultValue: '', description: 'GitHub PR number from n8n')
+        string(name: 'BRANCH', defaultValue: '', description: 'PR branch')
+        string(name: 'SHA', defaultValue: '', description: 'Commit SHA')
+    }
     environment {
         CI = 'true'
     }
@@ -55,6 +59,12 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: true
             ])
+        }
+        success {
+            script { notifyN8n('SUCCESS') }
+        }
+        failure {
+            script { notifyN8n('FAILURE') }
         }
     }
 }
