@@ -68,3 +68,18 @@ pipeline {
         }
     }
 }
+
+def notifyN8n(String status) {
+    def payload = groovy.json.JsonOutput.toJson([
+        pr_number   : params.PR_NUMBER,
+        status       : status,
+        job_name     : env.JOB_NAME,
+        build_number : env.BUILD_NUMBER,
+        build_url    : env.BUILD_URL
+    ])
+    sh """
+        curl -sS -X POST 'https://iversonlv.app.n8n.cloud/webhook/jenkins-build-result' \
+             -H 'Content-Type: application/json' \
+             -d '${payload}'
+    """
+}
